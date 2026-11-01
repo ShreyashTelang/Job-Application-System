@@ -1,0 +1,23 @@
+{
+  "name": "job-application-portal",
+  "version": "1.0.0",
+  "description": "Job Application Portal demonstrating Node.js server-side validation",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "server-side-validation",
+    "ejs"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.3.0"
+  }
+}

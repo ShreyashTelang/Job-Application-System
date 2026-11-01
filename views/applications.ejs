@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-brand">
+        <span class="brand-icon">💼</span>
+        <span>CareersHub</span>
+      </a>
+      <ul class="nav-links">
+        <li>
+          <a href="/" class="nav-link">
+            <span>Apply Now</span>
+          </a>
+        </li>
+        <li>
+          <a href="/applications" class="nav-link active">
+            <span>Submitted Applications</span>
+            <span class="nav-badge"><%= totalApplications %></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <main class="container">
+    <div class="apps-header">
+      <div>
+        <h1 class="page-title" style="text-align: left; margin-bottom: 0.2rem;">Submitted Applications</h1>
+        <p class="page-subtitle" style="text-align: left; margin: 0;">
+          Manage and review all candidates who have applied through the portal.
+        </p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span class="stat-pill">Total: <strong><%= totalApplications %></strong> <%= totalApplications === 1 ? 'Candidate' : 'Candidates' %></span>
+        <a href="/" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">+ New Application</a>
+      </div>
+    </div>
+
+    <% if (applications.length === 0) { %>
+      <div class="empty-state">
+        <div class="empty-icon">📭</div>
+        <h2 style="margin-bottom: 0.5rem; color: var(--text-main);">No Applications Submitted Yet</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+          Be the first candidate to apply! All applications will be displayed here in real time.
+        </p>
+        <a href="/" class="btn btn-primary">Submit First Application</a>
+      </div>
+    <% } else { %>
+      <div class="apps-grid">
+        <% applications.forEach(function(app) { %>
+          <article class="app-card">
+            <div class="app-card-header">
+              <div>
+                <div class="applicant-name"><%= app.fullName %></div>
+                <div style="margin-top: 0.35rem;">
+                  <span class="app-badge-pos"><%= app.position %></span>
+                  <span class="app-badge-exp"><%= app.experience %> yr(s) exp</span>
+                </div>
+              </div>
+              <form action="/applications/<%= app.id %>/delete" method="POST" onsubmit="return confirm('Are you sure you want to delete the application for <%= app.fullName %>?');">
+                <button type="submit" class="btn btn-danger-outline" title="Delete application">
+                  🗑️ Delete
+                </button>
+              </form>
+            </div>
+
+            <div class="app-meta-grid">
+              <div class="meta-item">
+                <strong>Email Address</strong>
+                <a href="mailto:<%= app.email %>" style="color: var(--primary); text-decoration: none;"><%= app.email %></a>
+              </div>
+              <div class="meta-item">
+                <strong>Phone Number</strong>
+                <a href="tel:<%= app.phone %>" style="color: var(--primary); text-decoration: none;"><%= app.phone %></a>
+              </div>
+              <div class="meta-item">
+                <strong>Application ID</strong>
+                <span><%= app.id %></span>
+              </div>
+              <div class="meta-item">
+                <strong>Submitted On</strong>
+                <span><%= app.submittedAt %></span>
+              </div>
+            </div>
+
+            <div class="app-cover-letter">
+              <strong style="display:block; font-size: 0.78rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.35rem; letter-spacing: 0.05em;">Cover Letter</strong>
+              <p style="margin: 0; line-height: 1.5;"><%= app.coverLetter %></p>
+            </div>
+
+            <div class="app-card-footer">
+              <span>Status: <strong style="color: var(--success);">Validated &amp; Registered</strong></span>
+              <span>ID: <%= app.id %></span>
+            </div>
+          </article>
+        <% }); %>
+      </div>
+    <% } %>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; <%= new Date().getFullYear() %> CareersHub Portal &bull; Built with Node.js &amp; Express</p>
+  </footer>
+
+</body>
+</html>
