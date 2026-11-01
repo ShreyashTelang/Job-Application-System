@@ -105,24 +105,6 @@ Job_Application/
 
 ---
 
-## 🚀 Getting Started
-
-### 1. Install Dependencies
-```bash
-npm install
-```
-
-### 2. Start the Server
-```bash
-npm start
-```
-The server will start on `http://localhost:3000`.
-
-### 3. Open in Browser
-Visit [http://localhost:3000](http://localhost:3000) in your web browser.
-
----
-
 ## 🧪 Running the Automated Test Suite
 
 To verify all server-side validation rules, data preservation, submission, and deletion:
